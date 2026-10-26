@@ -1,0 +1,6 @@
+interface:
+  display_name: "功能完成后同步 GitHub"
+  short_description: "功能验证完成后询问是否上传，选择后自动提交并同步到你的 GitHub"
+  default_prompt: "使用 $github-sync-on-complete，在功能完成后询问是否上传，并在我选择上传后自动提交和同步GitHub。"
+policy:
+  allow_implicit_invocation: true
