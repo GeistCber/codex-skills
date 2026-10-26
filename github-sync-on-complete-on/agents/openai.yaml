@@ -1,0 +1,6 @@
+interface:
+  display_name: "github-sync-on-complete_on"
+  short_description: "开启 Git 同步并立即检查当前会话项目，完成后询问上传，确认后自动同步"
+  default_prompt: "使用 $github-sync-on-complete-on 开启Git同步，立即读取当前会话项目上下文并检查完成状态；满足条件直接询问上传，确认后自动同步。"
+policy:
+  allow_implicit_invocation: true

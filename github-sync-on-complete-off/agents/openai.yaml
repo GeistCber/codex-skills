@@ -1,0 +1,6 @@
+interface:
+  display_name: "github-sync-on-complete_off"
+  short_description: "关闭任务完成后的 Git 同步检查与上传询问，只切换开关而不影响业务"
+  default_prompt: "使用 $github-sync-on-complete-off 关闭Git同步功能，只切换开关。"
+policy:
+  allow_implicit_invocation: true
