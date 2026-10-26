@@ -1,11 +1,27 @@
 ---
 name: github-sync-on-complete
-description: 在项目功能或修复完成并通过验证后，询问是否上传GitHub；用户选择上传后，自动整理本次改动、提交、推送并核对远程。也用于用户明确要求同步Git或上传GitHub时。支持Windows现有Git凭据、系统代理及首次创建私有仓库。
+description: 受Codex启用开关控制；开启后在项目功能或修复完成并通过验证时询问是否上传GitHub，确认后自动提交、推送并核对远程。也用于用户明确要求同步Git或上传GitHub时，支持Windows现有Git凭据和系统代理。
 ---
 
 # 功能完成后同步 GitHub
 
 默认GitHub用户为 **GeistCber**。每个完成节点询问一次，用户选择上传后自动完成提交和同步。技能本身不会创建定时任务、后台监视或应用事件钩子；由用户的全局AGENTS.md完成规则调用。
+
+## 启用开关
+
+使用Codex原生开关：`C:\Users\Laptop\.codex\config.toml`中本技能的`[[skills.config]]`配置项，`enabled = true`为开启、`enabled = false`为关闭。官方格式见[Codex技能开关](https://developers.openai.com/codex/skills/#enable-or-disable-local-codex-skills)。
+
+```toml
+[[skills.config]]
+path = 'C:\Users\Laptop\.codex\skills\github-sync-on-complete\SKILL.md'
+enabled = true
+```
+
+- **开启**：后续项目任务完成时持续检查是否已完成功能、是否通过必要验证、是否有待同步内容；满足条件再询问本次是否上传。开关状态保存在本机，持续有效，直到用户关闭，不要求每个新会话重新开启。
+- **关闭**：不执行自动完成检查、不自动弹上传选项、不自动提交或推送。全局规则必须先检查开关，不能通过直接读取本技能文件绕过禁用。
+- 用户说“开启Git同步”“启用这个技能”时，用编辑工具将这一配置项设为true；说“关闭Git同步”“停用这个技能”时设为false。保留其他配置，同一路径只保留一个配置项。更改从后续对话按全局规则读取时生效，Codex技能列表的显示以应用实际刷新为准。
+- 开关只控制自动完成流程，并不等于提前授权每一次上传。原来的确认流程保持；单次选择“暂不上传”也不关闭整个开关。用户明确要求本次直接同步时沿用其授权。
+- 查询或切换开关只报告状态，不触发上传，也不为了同步开关去上传本机全局配置和凭据。没有配置项时遵循Codex默认启用；不能仅以技能出现在列表中认定用户授权上传。
 
 ## 完成节点与选择
 
