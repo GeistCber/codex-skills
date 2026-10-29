@@ -1,6 +1,6 @@
 interface:
-  display_name: "后台测试与桌面操作分离"
-  short_description: "默认运行不接管桌面的自动测试，独立保留屏幕交互验收并明确覆盖范围"
-  default_prompt: "使用 $background-testing 验证当前项目，优先运行后台自动测试，单独列出需要桌面交互验收的范围并提供证据。"
+  display_name: "可控实操测试与结构化报告"
+  short_description: "以可控的真实界面全流程验收为主，脚本补充，通知阶段并交付图文覆盖报告"
+  default_prompt: "使用 $background-testing 验收当前项目：先盘点覆盖与独立预期，通知桌面接管和阶段变化，以真实界面全流程测试为主、脚本为辅，交付可追溯的图文报告。"
 policy:
   allow_implicit_invocation: true

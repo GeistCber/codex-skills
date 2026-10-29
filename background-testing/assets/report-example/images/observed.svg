@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="260" viewBox="0 0 720 260">
+  <rect width="720" height="260" fill="#fffafa"/>
+  <g font-family="Microsoft YaHei, sans-serif" fill="#203145">
+    <text x="24" y="32" font-size="19">报告演示 · 失败示意（非实测截图）</text>
+    <rect x="65" y="75" width="175" height="100" fill="#fff0f0" stroke="#c34646" stroke-width="3" stroke-dasharray="8 6"/>
+    <g stroke="#37668b" stroke-width="3">
+      <rect x="240" y="75" width="210" height="100" fill="#e3f1e8"/>
+      <rect x="450" y="75" width="175" height="100" fill="#dceaf5"/>
+    </g>
+    <g font-size="20" text-anchor="middle">
+      <text x="152" y="132" fill="#ac2b2b">缺少 750</text><text x="345" y="132">900</text><text x="538" y="132">750</text>
+      <text x="345" y="215">实际只有两段：900 + 750 = 1650 mm</text>
+    </g>
+  </g>
+</svg>

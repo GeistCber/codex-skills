@@ -1,6 +1,6 @@
 interface:
   display_name: "background-testing_off"
-  short_description: "关闭后续后台测试自动模式并保留脚本和报告，独立开关入口仍可用"
-  default_prompt: "使用 $background-testing-off 关闭后台测试模式，只切换开关并确认。"
+  short_description: "关闭后续可控实操测试自动模式，保留原开关、脚本、数据及报告"
+  default_prompt: "使用 $background-testing-off 关闭可控实操测试模式，只切换原有开关并确认。"
 policy:
   allow_implicit_invocation: true

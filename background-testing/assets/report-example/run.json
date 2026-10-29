@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "run_id": "DEMO-controlled-desktop",
+  "title": "可控实操验收报告示例 · 非真实测试",
+  "project": "报告模板演示",
+  "is_demo": true,
+  "phase": "finished",
+  "control": "released",
+  "inventory": {
+    "complete": true,
+    "sources": ["人工构造的报告展示数据，不是项目原图或实测结果"],
+    "strategy": "演示通过、失败、未测、暂缓、诊断与验收的区别；不声明实际业务覆盖率。"
+  },
+  "inputs": [],
+  "build": {
+    "revision": "demo-only",
+    "dirty_state": "演示，无业务代码",
+    "artifact_sha256": "不适用：报告展示样例",
+    "config": "离线演示，无应用或桌面操作"
+  },
+  "events": [
+    {"at": "2026-10-29T09:00:00+08:00", "phase": "planning", "control": "background", "notice": "演示：先展示覆盖计划，不占用桌面。"},
+    {"at": "2026-10-29T09:01:00+08:00", "phase": "desktop", "control": "desktop", "notice": "演示通知文字：将测试宽度与完整组合；本样例实际没有接管桌面。"},
+    {"at": "2026-10-29T09:03:00+08:00", "phase": "supplement", "control": "background", "notice": "演示：桌面释放，转为数值诊断；发现缺段不等于已修复。"},
+    {"at": "2026-10-29T09:04:00+08:00", "phase": "finished", "control": "released", "notice": "演示结束：保留失败、未测与暂缓，不宣称产品完成。"}
+  ],
+  "coverage": [
+    {"id": "REQ-width", "kind": "requirement", "title": "扩大范围后结果覆盖完整宽度", "scope": "in", "reason": "", "required_case_ids": ["UI-01"]},
+    {"id": "RES-front", "kind": "resource", "title": "已支持的正面资源", "scope": "in", "reason": "", "required_case_ids": ["UI-01"]},
+    {"id": "SCENE-full", "kind": "combination", "title": "完整组合符合独立参考", "scope": "in", "reason": "", "required_case_ids": ["UI-02"]},
+    {"id": "FLOW-reopen", "kind": "workflow", "title": "保存重开后结果保持", "scope": "in", "reason": "", "required_case_ids": ["UI-03"]},
+    {"id": "RES-side", "kind": "resource", "title": "侧面资源", "scope": "deferred", "reason": "演示范围决定：侧面暂缓；必须保留差距，不能称原图完全复现。", "required_case_ids": []}
+  ],
+  "cases": [
+    {
+      "id": "UI-01", "title": "宽度范围正常路径", "purpose": "acceptance", "method": "desktop_ui",
+      "parameters": {"width_mm": 2400, "depth_mm": 5000},
+      "preconditions": ["示例数据；没有打开应用"],
+      "steps": ["设置两个端点和方向", "生成结果并检查全宽"],
+      "expected": {"source": "人工构造的独立预期，非插件输出", "description": "三个正面模块完整出现，总宽 2400 mm。"},
+      "attempts": [{"id": "A1", "at": "2026-10-29T09:01:00+08:00", "status": "Passed", "observed": "演示记录：三个模块与预期一致；不是实测。", "reason": "", "evidence": ["expected"], "review": {"outcome": "matched", "note": "演示比较：三段数量和总宽一致；图片为示意。"}}]
+    },
+    {
+      "id": "UI-02", "title": "完整组合发现缺段", "purpose": "acceptance", "method": "desktop_ui",
+      "parameters": {"expected_width_mm": 2400, "observed_width_mm": 1650},
+      "preconditions": ["演示用完整组合"],
+      "steps": ["在完整平面设置索引", "生成后对照参考逐段核验"],
+      "expected": {"source": "演示参考示意图", "description": "三段为 750 + 900 + 750，总宽 2400 mm；不能只看生成流程成功。"},
+      "attempts": [{"id": "A1", "at": "2026-10-29T09:02:00+08:00", "status": "Failed", "observed": "演示结果仅 900 + 750，总宽 1650 mm。", "reason": "演示缺失 750 mm；需单独判断功能范围和根因，不能靠诊断通过抹掉失败。", "evidence": ["expected", "observed"], "review": {"outcome": "different", "note": "对照全宽和三段数量，保留差异。"}}]
+    },
+    {
+      "id": "UI-03", "title": "保存与重开", "purpose": "acceptance", "method": "desktop_ui",
+      "parameters": {}, "preconditions": ["必须使用副本"],
+      "steps": ["保存测试副本", "重开并检查索引和结果"],
+      "expected": {"source": "保存重开的业务要求", "description": "索引及生成结果保持一致。"},
+      "attempts": []
+    },
+    {
+      "id": "DIAG-01", "title": "补充诊断定位缺段", "purpose": "diagnostic", "method": "script",
+      "parameters": {"missing_mm": 750}, "preconditions": ["已有完整组合的失败记录"],
+      "steps": ["读取逐段记录", "定位缺失对象和处理原因"],
+      "expected": {"source": "演示的独立逐段清单", "description": "指出缺失的 750 mm；诊断不改变验收失败状态。"},
+      "attempts": [{"id": "A1", "at": "2026-10-29T09:03:00+08:00", "status": "Passed", "observed": "演示诊断找到了缺段，未修复业务功能。", "reason": "", "evidence": ["diagnosis"], "review": {"outcome": "matched", "note": "诊断目标满足；UI-02 仍失败，UI-03 仍未测。"}}]
+    }
+  ],
+  "attachments": [
+    {"id": "expected", "path": "images/expected.svg", "kind": "illustration", "caption": "演示预期：三段完整，总宽 2400 mm（非实测截图）"},
+    {"id": "observed", "path": "images/observed.svg", "kind": "illustration", "caption": "演示实际：缺少左段，总宽 1650 mm（非实测截图）"},
+    {"id": "diagnosis", "path": "logs/diagnosis.txt", "kind": "log", "caption": "演示诊断日志；不能证明功能修复"}
+  ],
+  "limitations": [
+    "这是报告功能展示。图片是人工示意，不是 AutoCAD 截图；没有执行任何项目测试或桌面输入。",
+    "完整组合仍失败；保存重开未测；侧面暂缓。不能用补充诊断通过或范围内单项通过宣称全部完成。"
+  ]
+}

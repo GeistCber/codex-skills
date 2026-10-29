@@ -1,6 +1,6 @@
 interface:
   display_name: "background-testing_on"
-  short_description: "开启后台测试模式并立即检查当前会话项目，持久生效直到明确关闭"
-  default_prompt: "使用 $background-testing-on 开启后台测试模式，立即恢复当前会话项目并核对相关验证证据，推进必要后台测试。"
+  short_description: "开启可控实操测试模式并立即检查当前项目，保留原持久开关和桌面授权边界"
+  default_prompt: "使用 $background-testing-on 开启可控实操测试模式，立即恢复当前会话项目，核对覆盖和证据，通知当前阶段并推进已授权验证。"
 policy:
   allow_implicit_invocation: true
