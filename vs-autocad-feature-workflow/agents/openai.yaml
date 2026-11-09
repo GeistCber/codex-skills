@@ -1,4 +1,4 @@
 interface:
-  display_name: "VS＋AutoCAD插件功能开发"
-  short_description: "从真实图纸与规则预演到代码实现、原生效果对照及适用的实操验证，续接已确认需求"
-  default_prompt: "使用 $vs-autocad-feature-workflow 开发本项目的AutoCAD插件功能，先恢复已确认规则，再按本次需要进行几何核对、预演、实现和验证。"
+  display_name: "AutoCAD功能构思验证与实现"
+  short_description: "检验功能构思，用真实DWG形成设计预演，再落实代码并核对本次实际效果"
+  default_prompt: "使用 $vs-autocad-feature-workflow 检验这项AutoCAD功能构思，按本次需要推进设计预演、规则确认、代码落实与实际效果核对。"
